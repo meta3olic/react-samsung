@@ -5,12 +5,12 @@ import React from "react";
 export const ItemCard = ({name, price, img, rating}) => {
 
   const image = img.replace('//', 'http://');
-
+  const shortName = name.replace(/ \(.*?\)/gm, '').replace('Смартфон', '');
   return (
     <Card>
       <Image src={image} wrapped ui={false} />
       <Card.Content>
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>{shortName}</Card.Header>
       </Card.Content>
       <Card.Content extra>
         {
@@ -20,7 +20,13 @@ export const ItemCard = ({name, price, img, rating}) => {
         }
       </Card.Content>
       <Card.Content>
-        <Rating defaultRating={rating} maxRating={5} disabled />
+        <Rating icon={"star"} defaultRating={1} maxRating={1} disabled />
+        {
+          (rating != '0.0')
+            ? <span className="product-rating">{rating}</span>
+            : <span className="product-rating">Нет отзывов</span>
+        }
+
       </Card.Content>
     </Card>
   );
