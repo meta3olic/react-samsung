@@ -1,20 +1,20 @@
 const initialState = {
-  isReady: false,
-  products: [],
+  searchQuery: '',
+  filterBy: 'all'
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_ITEMS':
+    case 'SET_QUERY':
       return {
         ...state,
-        products: action.payload,
+        searchQuery: action.payload
       };
-    case 'SET_IS_READY':
+    case 'SET_FILTER':
       return {
         ...state,
-        isReady: action.payload
-      }
+        filterBy: action.payload
+      };
     default:
       return state;
   }

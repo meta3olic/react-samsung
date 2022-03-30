@@ -1,5 +1,5 @@
 const initialState = {
-  items: null
+  items: []
 }
 
 export default (state = initialState, action) => {

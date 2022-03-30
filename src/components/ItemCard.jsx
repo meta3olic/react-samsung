@@ -1,8 +1,8 @@
-import {Card, Icon, Image, Rating} from "semantic-ui-react";
+import {Card, Icon, Image, Rating, Button, List} from "semantic-ui-react";
 import React from "react";
 
-
-export const ItemCard = ({name, price, img, rating}) => {
+const ItemCard = product => {
+  const {name, price, img, rating, addToCart, addCount} = product
 
   const image = img.replace('//', 'http://');
   const shortName = name.replace(/ \(.*?\)/gm, '').replace('Смартфон', '');
@@ -26,9 +26,16 @@ export const ItemCard = ({name, price, img, rating}) => {
             ? <span className="product-rating">{rating}</span>
             : <span className="product-rating">Нет отзывов</span>
         }
-
       </Card.Content>
+      {
+        (price)
+          ? <Button onClick={addToCart.bind(this, product)}>
+              Добавить в корзину {addCount > 0 && `(${addCount})`}
+            </Button>
+          : <Button disabled={true}>Товар отсутствует</Button>
+      }
     </Card>
   );
-
 }
+
+export default ItemCard;

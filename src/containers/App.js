@@ -4,14 +4,12 @@ import * as itemsAction from "../actions/items";
 import App from "../components/App";
 import orderBy from "lodash/orderBy";
 
-const filterBy = (products, type) => {
-  switch (type) {
-    case 'all':
-      return products;
+const sortBy = (products, sort) => {
+  switch (sort) {
     case 'stock':
       return products.filter(i => i.price);
     case 'rating':
-      return orderBy(products.filter(i => i.price), type, 'desc');
+      return orderBy(products.filter(i => i.price), 'rating', 'desc');
     case 'price_high':
       return orderBy(
         products
@@ -33,10 +31,19 @@ const filterBy = (products, type) => {
   }
 }
 
-const mapStateToProps = ({items}) => ({
+const searchBy = (products, query) => {
+  return products.filter(
+    i =>
+      i.name.toLowerCase().indexOf(query.toLowerCase()) >= 0
+  );
+}
+
+const filterItems = (products, sort, query) => sortBy(searchBy(products, query), sort);
+
+const mapStateToProps = ({items, filter}) => ({
   items: {
     ...items,
-    products: filterBy(items.products, items.filterBy)
+    products: items.products && filterItems(items.products, filter.filterBy, filter.searchQuery)
   }
 });
 

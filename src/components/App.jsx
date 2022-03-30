@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Container, Card, Icon, Image } from "semantic-ui-react";
-import { ItemCard } from "./ItemCard";
-import MenuExample from "./MenuExample";
+import ItemCard from "../containers/ItemCard";
+import MenuExample from "../containers/MenuExample";
 import LoaderExample from "./Loader";
 import Filter from "../containers/Fiter";
 
